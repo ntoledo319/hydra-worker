@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HYDRA API — Developer Toolkit</title>
+<meta name="description" content="22 free developer utility endpoints on the global edge. Text analysis, hashing, encoding, JSON tools, regex, security, data generation. No API key required.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0b0e;--card:#12141a;--border:#1e2130;--purple:#9b7aff;--teal:#3ddba9;--text:#e8e6e1;--muted:#8b8b9a;--dim:#555566;--code-bg:#1a1d28}
+body{font-family:-apple-system,system-ui,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--purple);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+</style></head><body>
+<div class="container">
+<style>
+header{text-align:center;padding:60px 0 40px;border-bottom:1px solid var(--border)}
+header h1{font-size:36px;font-weight:700;letter-spacing:-1px}
+header h1 span{background:linear-gradient(135deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--muted);font-size:16px;margin-top:8px}
+.badges{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.badge{font-size:12px;padding:4px 12px;border-radius:20px;font-weight:500}
+.badge-purple{background:#9b7aff22;color:var(--purple)}
+.badge-teal{background:#3ddba922;color:var(--teal)}
+.base-url{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:12px 20px;margin:24px auto;max-width:500px;text-align:center;font-family:monospace;font-size:15px;color:var(--teal);cursor:pointer;position:relative}
+.base-url:hover::after{content:'Copied!';position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted)}
+section{padding:40px 0;border-bottom:1px solid var(--border)}
+h2{font-size:22px;font-weight:600;margin-bottom:16px}
+h3{font-size:16px;font-weight:600;margin:20px 0 8px;color:var(--purple)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:16px 0}
+.endpoint{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 16px;cursor:pointer;transition:border-color .2s}
+.endpoint:hover{border-color:var(--purple)}
+.endpoint .method{font-size:11px;font-weight:600;padding:2px 6px;border-radius:4px;margin-right:6px}
+.method-post{background:#9b7aff22;color:var(--purple)}
+.method-get{background:#3ddba922;color:var(--teal)}
+.endpoint .path{font-family:monospace;font-size:14px}
+.endpoint .desc{font-size:12px;color:var(--muted);margin-top:4px}
+#playground{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:24px}
+#playground h3{margin-top:0}
+select,textarea,button,input{font-family:inherit;font-size:14px}
+select{background:var(--code-bg);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px 12px;width:100%}
+textarea{background:var(--code-bg);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:12px;width:100%;resize:vertical;font-family:monospace;font-size:13px}
+button{background:var(--purple);color:#fff;border:none;border-radius:6px;padding:10px 24px;cursor:pointer;font-weight:500}
+button:hover{opacity:.9}
+#response{background:var(--code-bg);border:1px solid var(--border);border-radius:6px;padding:16px;font-family:monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;max-height:400px;overflow-y:auto;margin-top:12px;color:var(--teal);display:none}
+#timing{font-size:12px;color:var(--muted);margin-top:8px}
+footer{text-align:center;padding:40px 0;color:var(--dim);font-size:13px}
+footer a{color:var(--muted)}
+</style>
+<header>
+<h1><span>HYDRA</span> Developer Toolkit</h1>
+<p>22 free developer utility endpoints on the global edge. No API key required.</p>
+<div class="badges">
+<span class="badge badge-purple">22 Endpoints</span>
+<span class="badge badge-teal">Cloudflare Workers</span>
+<span class="badge badge-purple">~50ms Worldwide</span>
+<span class="badge badge-teal">100% Free</span>
+</div>
+<div class="base-url" onclick="navigator.clipboard.writeText('https://hydra-worker.toledonick98.workers.dev')">
+https://hydra-worker.toledonick98.workers.dev
+</div>
+</header>
+
+<section>
+<h2>Try It — Interactive Playground</h2>
+<div id="playground">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+<div>
+<label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">Endpoint</label>
+<select id="ep-select" onchange="updatePlayground()">
+<option value="POST|/text/analyze|{&quot;text&quot;:&quot;The quick brown fox jumps over the lazy dog. This sentence tests readability analysis.&quot;}">POST /text/analyze</option>
+<option value="POST|/text/keywords|{&quot;text&quot;:&quot;Machine learning and artificial intelligence are transforming software development. AI tools help developers write better code faster.&quot;,&quot;top_n&quot;:5}">POST /text/keywords</option>
+<option value="POST|/text/slug|{&quot;text&quot;:&quot;My Amazing Blog Post Title! (2026 Edition)&quot;}">POST /text/slug</option>
+<option value="POST|/text/case|{&quot;text&quot;:&quot;convert this text to all cases&quot;}">POST /text/case</option>
+<option value="POST|/crypto/hash|{&quot;text&quot;:&quot;hello world&quot;,&quot;algorithm&quot;:&quot;sha256&quot;}">POST /crypto/hash</option>
+<option value="POST|/crypto/hash-all|{&quot;text&quot;:&quot;hello world&quot;}">POST /crypto/hash-all</option>
+<option value="GET|/crypto/uuid?count=5|">GET /crypto/uuid</option>
+<option value="POST|/json/validate|{&quot;text&quot;:&quot;{\\\&quot;name\\\&quot;:\\\&quot;HYDRA\\\&quot;,\\\&quot;version\\\&quot;:1}&quot;}">POST /json/validate</option>
+<option value="POST|/security/password-strength|{&quot;password&quot;:&quot;MyP@ssw0rd!2026&quot;}">POST /security/password-strength</option>
+<option value="POST|/regex/test|{&quot;pattern&quot;:&quot;(\\\\d{3})-(\\\\d{4})&quot;,&quot;text&quot;:&quot;Call 555-1234 or 867-5309&quot;,&quot;flags&quot;:&quot;g&quot;}">POST /regex/test</option>
+<option value="POST|/validate/email|{&quot;text&quot;:&quot;dev@toledotechnologies.com&quot;}">POST /validate/email</option>
+<option value="POST|/url/parse|{&quot;text&quot;:&quot;https://example.com/path?q=search&amp;page=2#results&quot;}">POST /url/parse</option>
+<option value="POST|/color/convert|{&quot;color&quot;:&quot;#9b7aff&quot;}">POST /color/convert</option>
+<option value="POST|/jwt/decode|{&quot;text&quot;:&quot;eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dummysig&quot;}">POST /jwt/decode</option>
+<option value="GET|/time/now|">GET /time/now</option>
+<option value="POST|/generate/lorem|{&quot;paragraphs&quot;:2,&quot;sentences_per&quot;:3}">POST /generate/lorem</option>
+<option value="POST|/generate/random-data|{&quot;count&quot;:3,&quot;fields&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;phone&quot;,&quot;company&quot;]}">POST /generate/random-data</option>
+</select>
+</div>
+<div style="display:flex;align-items:flex-end">
+<button onclick="sendRequest()">Send Request</button>
+</div>
+</div>
+<label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px">Request Body (JSON)</label>
+<textarea id="req-body" rows="4"></textarea>
+<div id="timing"></div>
+<pre id="response"></pre>
+</div>
+</section>
+
+<section>
+<h2>All Endpoints</h2>
+<h3>Text Analysis</h3>
+<div class="grid">
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/text/analyze</span><div class="desc">Word count, reading time, Flesch score, readability</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/text/keywords</span><div class="desc">Keyword extraction with frequency & density</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/text/slug</span><div class="desc">URL-safe slug generation</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/text/case</span><div class="desc">camelCase, snake_case, kebab-case, PascalCase</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/text/strip-html</span><div class="desc">Remove HTML tags, decode entities</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/text/diff</span><div class="desc">Line-by-line text comparison</div></div>
+</div>
+<h3>Crypto & Encoding</h3>
+<div class="grid">
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/crypto/hash</span><div class="desc">SHA-1, SHA-256, SHA-512, MD5</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/crypto/hash-all</span><div class="desc">All hash algorithms at once</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/crypto/base64/encode</span><div class="desc">Base64 encode text</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/crypto/base64/decode</span><div class="desc">Base64 decode text</div></div>
+<div class="endpoint"><span class="method method-get">GET</span><span class="path">/crypto/uuid</span><div class="desc">Generate 1-100 v4 UUIDs</div></div>
+</div>
+<h3>JSON, Security & Validation</h3>
+<div class="grid">
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/json/validate</span><div class="desc">Validate, prettify, minify JSON</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/json/diff</span><div class="desc">Structural JSON comparison</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/security/password-strength</span><div class="desc">Score, entropy, feedback</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/regex/test</span><div class="desc">Pattern testing with capture groups</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/validate/email</span><div class="desc">Email format validation</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/jwt/decode</span><div class="desc">Decode JWT header & payload</div></div>
+</div>
+<h3>Utilities & Generation</h3>
+<div class="grid">
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/url/parse</span><div class="desc">URL decomposition with query params</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/color/convert</span><div class="desc">Hex ↔ RGB ↔ HSL conversion</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/convert/md-to-html</span><div class="desc">Markdown to HTML</div></div>
+<div class="endpoint"><span class="method method-get">GET</span><span class="path">/time/now</span><div class="desc">Current time (ISO, Unix, human)</div></div>
+<div class="endpoint"><span class="method method-get">GET</span><span class="path">/time/convert/:ts</span><div class="desc">Unix timestamp to readable</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/generate/lorem</span><div class="desc">Lorem ipsum paragraphs</div></div>
+<div class="endpoint"><span class="method method-post">POST</span><span class="path">/generate/random-data</span><div class="desc">Fake names, emails, phones</div></div>
+</div>
+</section>
+
+<footer>
+<p>Built by <a href="https://toledotechnologies.com">Toledo Technologies LLC</a></p>
+<p style="margin-top:4px"><a href="https://github.com/ntoledo319/hydra-worker">GitHub</a> · MIT License · Powered by Cloudflare Workers</p>
+</footer>
+</div>
+<script>
+const BASE = 'https://hydra-worker.toledonick98.workers.dev';
+function updatePlayground() {
+  const [method, path, body] = document.getElementById('ep-select').value.split('|');
+  const ta = document.getElementById('req-body');
+  if (method === 'GET') { ta.value = ''; ta.disabled = true; }
+  else { ta.disabled = false; try { ta.value = JSON.stringify(JSON.parse(body), null, 2); } catch { ta.value = body; } }
+  document.getElementById('response').style.display = 'none';
+  document.getElementById('timing').textContent = '';
+}
+async function sendRequest() {
+  const [method, path] = document.getElementById('ep-select').value.split('|');
+  const body = document.getElementById('req-body').value;
+  const resp = document.getElementById('response');
+  const timing = document.getElementById('timing');
+  resp.style.display = 'block';
+  resp.textContent = 'Loading...';
+  const t0 = performance.now();
+  try {
+    const opts = { method };
+    if (method === 'POST') { opts.headers = { 'Content-Type': 'application/json' }; opts.body = body; }
+    const r = await fetch(BASE + path, opts);
+    const data = await r.json();
+    const ms = Math.round(performance.now() - t0);
+    resp.textContent = JSON.stringify(data, null, 2);
+    timing.textContent = `${r.status} ${r.statusText} · ${ms}ms · ${path}`;
+  } catch (e) { resp.textContent = 'Error: ' + e.message; timing.textContent = ''; }
+}
+updatePlayground();
+</script>
+</body></html>

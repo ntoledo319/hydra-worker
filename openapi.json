@@ -1,0 +1,257 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "HYDRA Developer Toolkit",
+    "description": "20+ developer utility endpoints: text analysis, hashing, encoding, JSON tools, regex, security, data generation. Lightning fast on Cloudflare Workers global edge.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://hydra-worker.toledonick98.workers.dev"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Health Check",
+        "operationId": "healthCheck",
+        "tags": ["Health"],
+        "responses": { "200": { "description": "Service status" } }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Status",
+        "operationId": "status",
+        "tags": ["Health"],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/text/analyze": {
+      "post": {
+        "summary": "Analyze Text",
+        "description": "Word count, readability scores, reading time, sentence count",
+        "operationId": "analyzeText",
+        "tags": ["Text Analysis"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string", "description": "Text to analyze" } } } } } },
+        "responses": { "200": { "description": "Analysis results" } }
+      }
+    },
+    "/text/keywords": {
+      "post": {
+        "summary": "Extract Keywords",
+        "description": "Keyword extraction with frequency and density analysis",
+        "operationId": "extractKeywords",
+        "tags": ["Text Analysis"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" }, "top_n": { "type": "integer", "default": 10 } } } } } },
+        "responses": { "200": { "description": "Keywords with density" } }
+      }
+    },
+    "/text/slug": {
+      "post": {
+        "summary": "Generate URL Slug",
+        "operationId": "slugify",
+        "tags": ["Text Utilities"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" }, "separator": { "type": "string", "default": "-" } } } } } },
+        "responses": { "200": { "description": "URL slug" } }
+      }
+    },
+    "/text/case": {
+      "post": {
+        "summary": "Convert Text Case",
+        "description": "Convert to camelCase, snake_case, kebab-case, PascalCase, CONSTANT_CASE and more",
+        "operationId": "convertCase",
+        "tags": ["Text Utilities"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "All case variants" } }
+      }
+    },
+    "/text/strip-html": {
+      "post": {
+        "summary": "Strip HTML Tags",
+        "operationId": "stripHtml",
+        "tags": ["Text Utilities"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Clean text" } }
+      }
+    },
+    "/text/diff": {
+      "post": {
+        "summary": "Text Diff",
+        "description": "Line-by-line text comparison",
+        "operationId": "textDiff",
+        "tags": ["Text Utilities"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text1","text2"], "properties": { "text1": { "type": "string" }, "text2": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Diff results" } }
+      }
+    },
+    "/crypto/hash": {
+      "post": {
+        "summary": "Generate Hash",
+        "description": "SHA-1, SHA-256, SHA-512, or MD5 hash",
+        "operationId": "generateHash",
+        "tags": ["Crypto"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" }, "algorithm": { "type": "string", "enum": ["md5","sha1","sha256","sha512"], "default": "sha256" } } } } } },
+        "responses": { "200": { "description": "Hash result" } }
+      }
+    },
+    "/crypto/hash-all": {
+      "post": {
+        "summary": "All Hashes",
+        "description": "Generate MD5, SHA-1, SHA-256, SHA-512 simultaneously",
+        "operationId": "hashAll",
+        "tags": ["Crypto"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "All hash values" } }
+      }
+    },
+    "/crypto/base64/encode": {
+      "post": {
+        "summary": "Base64 Encode",
+        "operationId": "base64Encode",
+        "tags": ["Crypto"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Encoded string" } }
+      }
+    },
+    "/crypto/base64/decode": {
+      "post": {
+        "summary": "Base64 Decode",
+        "operationId": "base64Decode",
+        "tags": ["Crypto"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Decoded string" } }
+      }
+    },
+    "/crypto/uuid": {
+      "get": {
+        "summary": "Generate UUIDs",
+        "operationId": "generateUuid",
+        "tags": ["Crypto"],
+        "parameters": [{ "name": "count", "in": "query", "schema": { "type": "integer", "default": 1, "minimum": 1, "maximum": 100 } }],
+        "responses": { "200": { "description": "UUID list" } }
+      }
+    },
+    "/json/validate": {
+      "post": {
+        "summary": "Validate & Format JSON",
+        "description": "Validate, pretty-print, and minify JSON with key counting",
+        "operationId": "validateJson",
+        "tags": ["JSON"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string", "description": "JSON string to validate" } } } } } },
+        "responses": { "200": { "description": "Validation result with formatted output" } }
+      }
+    },
+    "/json/diff": {
+      "post": {
+        "summary": "JSON Diff",
+        "description": "Compare two JSON objects structurally",
+        "operationId": "jsonDiff",
+        "tags": ["JSON"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text1","text2"], "properties": { "text1": { "type": "string" }, "text2": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Structured diff" } }
+      }
+    },
+    "/regex/test": {
+      "post": {
+        "summary": "Test Regex Pattern",
+        "operationId": "testRegex",
+        "tags": ["Regex"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["pattern","text"], "properties": { "pattern": { "type": "string" }, "text": { "type": "string" }, "flags": { "type": "string", "default": "" } } } } } },
+        "responses": { "200": { "description": "Matches with groups" } }
+      }
+    },
+    "/security/password-strength": {
+      "post": {
+        "summary": "Check Password Strength",
+        "operationId": "passwordStrength",
+        "tags": ["Security"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["password"], "properties": { "password": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Strength score and feedback" } }
+      }
+    },
+    "/jwt/decode": {
+      "post": {
+        "summary": "Decode JWT Token",
+        "description": "Extract header and payload without verification",
+        "operationId": "decodeJwt",
+        "tags": ["Security"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Decoded JWT" } }
+      }
+    },
+    "/url/parse": {
+      "post": {
+        "summary": "Parse URL",
+        "operationId": "parseUrl",
+        "tags": ["Utilities"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Parsed URL components" } }
+      }
+    },
+    "/validate/email": {
+      "post": {
+        "summary": "Validate Email",
+        "operationId": "validateEmail",
+        "tags": ["Utilities"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Validation result" } }
+      }
+    },
+    "/color/convert": {
+      "post": {
+        "summary": "Convert Color",
+        "description": "Convert between hex, rgb, and hsl color formats",
+        "operationId": "convertColor",
+        "tags": ["Utilities"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["color"], "properties": { "color": { "type": "string", "description": "Hex (#FF5733) or rgb(255,87,51)" } } } } } },
+        "responses": { "200": { "description": "Color in all formats" } }
+      }
+    },
+    "/generate/lorem": {
+      "post": {
+        "summary": "Generate Lorem Ipsum",
+        "operationId": "generateLorem",
+        "tags": ["Data Generation"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "properties": { "paragraphs": { "type": "integer", "default": 3 }, "sentences_per": { "type": "integer", "default": 5 } } } } } },
+        "responses": { "200": { "description": "Lorem ipsum text" } }
+      }
+    },
+    "/generate/random-data": {
+      "post": {
+        "summary": "Generate Random Test Data",
+        "description": "Generate fake names, emails, phones, companies, addresses, dates, UUIDs",
+        "operationId": "generateRandomData",
+        "tags": ["Data Generation"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "properties": { "count": { "type": "integer", "default": 5 }, "fields": { "type": "array", "items": { "type": "string", "enum": ["name","email","phone","company","address","date","uuid","number"] }, "default": ["name","email","phone"] } } } } } },
+        "responses": { "200": { "description": "Random records" } }
+      }
+    },
+    "/convert/md-to-html": {
+      "post": {
+        "summary": "Markdown to HTML",
+        "operationId": "markdownToHtml",
+        "tags": ["Conversion"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" } } } } } },
+        "responses": { "200": { "description": "Converted HTML" } }
+      }
+    },
+    "/time/now": {
+      "get": {
+        "summary": "Current Timestamp",
+        "operationId": "timeNow",
+        "tags": ["Time"],
+        "responses": { "200": { "description": "Current time in multiple formats" } }
+      }
+    },
+    "/time/convert/{timestamp}": {
+      "get": {
+        "summary": "Convert Unix Timestamp",
+        "operationId": "convertTimestamp",
+        "tags": ["Time"],
+        "parameters": [{ "name": "timestamp", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": { "200": { "description": "Converted timestamp" } }
+      }
+    }
+  }
+}
