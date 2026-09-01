@@ -1,0 +1,14 @@
+name: hydra-worker
+status: active
+type: revenue
+oauth:
+  needed: false
+  google_scopes: []
+  redirect_uris: []
+deployment:
+  platform: cloudflare-workers
+  url: https://hydra-worker.toledonick98.workers.dev
+github: ntoledo319/hydra-worker
+last_touched: 2026-04-03
+original_path: /Users/nicholastoledo/CascadeProjects/hydra-worker
+notes: "Canonical HYDRA implementation and editable documentation surface since 2026-07-25."

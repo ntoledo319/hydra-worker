@@ -2,6 +2,12 @@
 
 > 22 developer utility endpoints on the global edge. Free. No API key required.
 
+> **Source-of-truth note (2026-07-25):** this repository is the canonical HYDRA
+> implementation and owns the editable `docs/index.html` surface. The former
+> standalone `hydra-site` checkout was byte-identical at consolidation and is
+> preserved at `archive/duplicates/hydra-site`; its Git history was not merged
+> or deleted. See [`docs/SOURCE-OF-TRUTH.md`](docs/SOURCE-OF-TRUTH.md).
+
 **Live API:** `https://hydra-worker.toledonick98.workers.dev`
 
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-F38020?logo=cloudflare&logoColor=white)](https://workers.cloudflare.com/)
