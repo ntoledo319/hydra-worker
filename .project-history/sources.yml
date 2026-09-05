@@ -1,0 +1,202 @@
+# Source inventory — every source examined while reconstructing this history.
+# class: direct | contemporaneous | retrospective | behavioral | inferred | external
+# access: accessible | inaccessible | partial
+# Absolute local paths of related git repositories let cited commit shas resolve outside this repo.
+audit_date: 2026-09-04
+sources:
+  - id: src-git-hydra-worker
+    kind: git repository (this project)
+    class: direct
+    access: accessible
+    local_path: /home/nick/Development/active/hydra-worker
+    locator: https://github.com/ntoledo319/hydra-worker.git
+    retrieved_at: 2026-09-04
+    notes: >-
+      All 4 reachable commits (refs/heads/master, refs/remotes/origin/master) inventoried and every diff read in full
+      except package-lock.json (2,788 generated lines, skipped). Not shallow, not partial, no stash, no notes, no
+      submodules, no worktrees; reflog 4 entries. Working tree clean at audit start. Local master is one unpushed
+      commit ahead of origin/master.
+  - id: src-git-hydra-api
+    kind: git repository (related; the Python/FastAPI sibling committed 75 minutes before this repository's root)
+    class: direct
+    access: accessible
+    local_path: /home/nick/Development/backburner/hydra-api
+    locator: https://github.com/ntoledo319/hydra-toolkit-api.git
+    retrieved_at: 2026-09-04
+    notes: 3 commits read in full; main.py compared route-by-route and literal-by-literal with src/index.js.
+  - id: src-git-hydra-site
+    kind: git repository (related; retired static mirror of docs/index.html)
+    class: direct
+    access: accessible
+    local_path: /home/nick/Development/archive/duplicates/hydra-site
+    locator: https://github.com/ntoledo319/hydra-site.git
+    retrieved_at: 2026-09-04
+    notes: Single commit 2026-05-28; public/index.html sha256 dfbcface41ac83c2ecb6643df1874c46550e87153cf3459df46cc3f19ed26678, identical to docs/index.html here (re-verified 2026-09-04).
+  - id: src-git-nohustle
+    kind: git repository (related; thematic predecessor, August 2025)
+    class: direct
+    access: accessible
+    local_path: "/home/nick/Development/archive/NoHustle API"
+    locator: https://github.com/ntoledo319/NoHustle-API.git
+    retrieved_at: 2026-09-04
+    notes: 24 reachable commits read for lineage; no code, route or documentation reference links it to HYDRA.
+  - id: src-git-thing
+    kind: git repository (related; the NoHustle growth kit of August 2025)
+    class: direct
+    access: accessible
+    local_path: /home/nick/Development/experiments/thing
+    locator: https://github.com/ntoledo319/spidermind-omega.git
+    retrieved_at: 2026-09-04
+    notes: Read only for the marketplace/free-tier arc that precedes HYDRA; push remote is disabled by the owner.
+  - id: src-gh-metadata
+    kind: GitHub REST metadata via authenticated gh (read-only) — repository, Pages, Actions runs, security settings
+    class: external
+    access: accessible
+    locator: "gh api repos/ntoledo319/hydra-worker{,/pages,/actions/runs,/tags,/releases}; git ls-remote"
+    retrieved_at: 2026-09-04
+    notes: >-
+      created_at 2026-03-26T06:28:30Z; public; description "22 free developer utility endpoints…"; topics api,
+      cloudflare-workers, developer-tools, free, serverless; license null; has_pages true (master:/docs, built);
+      exactly one Actions run ("pages build and deployment", success, 2026-04-03T08:01:27Z); no tags, releases,
+      issues or pull requests; pushed_at 2026-04-03T08:01:18Z. No pushes, issues, PRs or any write were made.
+  - id: src-live-probe
+    kind: read-only HTTP GET probes of public URLs
+    class: behavioral
+    access: accessible
+    locator: "https://hydra-worker.toledonick98.workers.dev/ and /health; https://ntoledo319.github.io/hydra-worker/; https://hydra-toolkit-api.onrender.com/health"
+    retrieved_at: 2026-09-04
+    notes: Worker 200 in 0.11 s with endpoints 20 and docs pointing at hydra-toolkit-api; Pages 200; the Python sibling's Render host 404 no-server.
+  - id: src-worktree-2026-09-04
+    kind: working-tree state at audit time
+    class: behavioral
+    access: accessible
+    locator: "git status --porcelain -uall (clean); git for-each-ref (master 57154c55…, origin/master 6808ec82…)"
+    retrieved_at: 2026-09-04
+    notes: Clean tree; the only present-tense fact is the unpushed snapshot commit. Nothing was modified, staged or pushed.
+  - id: src-git-toledo-command
+    kind: git repository (owner's private control-plane / portfolio index; cited for dated portfolio commits)
+    class: retrospective
+    access: accessible
+    local_path: /home/nick/Development/toledo-command
+    locator: /home/nick/Development/toledo-command
+    retrieved_at: 2026-09-04
+    notes: Only files mentioning hydra, hydra-site, hydra-api or nohustle were read; nothing personal was copied. Listed so its commit shas resolve.
+  - id: src-tc-master-portfolio
+    kind: owner portfolio documents (toledo-command/MASTER-PORTFOLIO.md section HYDRA; PORTFOLIO-DOSSIER.md; _VC-TARGET-LIST.md)
+    class: retrospective
+    access: accessible
+    locator: /home/nick/Development/toledo-command/MASTER-PORTFOLIO.md
+    retrieved_at: 2026-09-04
+    notes: Dated 2026-06-23 by its commit; "LIVE … 22 endpoints … a parallel Python/FastAPI variant for a possible RapidAPI listing … a clean edge-deploy demonstration more than a business".
+  - id: src-tc-registry-hydra
+    kind: owner asset registry note (toledo-command/registry/assets/hydra.md; registry/REPOS.md; registry/SYSTEMS.md)
+    class: retrospective
+    access: accessible
+    locator: /home/nick/Development/toledo-command/registry/assets/hydra.md
+    retrieved_at: 2026-09-04
+    notes: Verified 2026-08-03; the most detailed measurement of this repository (routes, playground, test, Pages) — and wrong about openapi.json's path count.
+  - id: src-tc-audit-2026-08
+    kind: owner asset audit dossiers (toledo-command/audit-2026-08/assets/active-hydra-worker.md, archive-duplicates-hydra-site.md, backburner-hydra-api.md; 03-TRUTH-VS-CLAIMS.md)
+    class: retrospective
+    access: accessible
+    locator: /home/nick/Development/toledo-command/audit-2026-08/assets/active-hydra-worker.md
+    retrieved_at: 2026-09-04
+    notes: Dated 2026-08-06; agent-written; measured facts plus verdict PARK; records the three uncommitted paths of the consolidation.
+  - id: src-tc-estate-audit-2026-08
+    kind: owner estate audit (toledo-command/estate-audit-2026-08/assets/active-hydra-worker.md; layers/01-surfaces-and-domains.md)
+    class: retrospective
+    access: accessible
+    locator: /home/nick/Development/toledo-command/estate-audit-2026-08/assets/active-hydra-worker.md
+    retrieved_at: 2026-09-04
+    notes: Dated 2026-08-06; rule-generated verdict KILL ("trivial: under 500 logical lines and under 10 commits"); License none.
+  - id: src-tc-root-reports-2026-07
+    kind: owner root reports (SHIP-QUEUE-2026-07-20, VALUE-AUDIT-GROUND-TRUTH-2026-07-20, GROUND-TRUTH-VALUE-AUDIT-2026-07-20, DEEP-RESEARCH-2026-07-22)
+    class: retrospective
+    access: accessible
+    locator: /home/nick/Development/toledo-command/archive/root-reports-2026-07/
+    retrieved_at: 2026-09-04
+    notes: The ship queue lists hydra-worker as LIVE and schedules "hydra-site + LICENSE on hydra-worker"; the deep-research note says "hydra is NOT actually live" while looking at the static repo.
+  - id: src-tc-synergy-report-2026-07-24
+    kind: owner generated report (toledo-command/archive/generated-reports/2026-07-24-active-project-synergy/01-portfolio-particle-collider.html)
+    class: retrospective
+    access: accessible
+    locator: /home/nick/Development/toledo-command/archive/generated-reports/2026-07-24-active-project-synergy/01-portfolio-particle-collider.html
+    retrieved_at: 2026-09-04
+    notes: One day before the consolidation; recommends "HYDRA Site → Worker docs or generated mirror … consolidate" and calls the pair the "easiest duplicate".
+  - id: src-tc-meta-inventory-2026-05
+    kind: workspace migration records (migration-plan.md, migration-log.txt)
+    class: contemporaneous
+    access: accessible
+    locator: /home/nick/Development/toledo-command/archive/_meta-inventory-2026-05/migration-log.txt
+    retrieved_at: 2026-09-04
+    notes: Machine log of the 2026-05-05 move from the CascadeProjects directory into backburner/hydra-worker and the generated manifest (status backburner, platform none, url null).
+  - id: src-tc-workspace-registry
+    kind: workspace registry and overrides (toledo-command/workspace/registry.json, project-overrides.json, ROOT-LAYOUT.md)
+    class: retrospective
+    access: accessible
+    locator: /home/nick/Development/toledo-command/workspace/project-overrides.json
+    retrieved_at: 2026-09-04
+    notes: canonical_status canonical; known risk "Local source changes do not authorize a Cloudflare deployment"; note "Keep docs/index.html synchronized through a deterministic local hash check".
+  - id: src-marketing-arm
+    kind: marketing-machine strategy docs (marketing-arm/portfolio.yml, KILL-LIST.md; toledo-command/strategy/marketing-machine/*)
+    class: retrospective
+    access: accessible
+    locator: /home/nick/Development/marketing-arm/portfolio.yml
+    retrieved_at: 2026-09-04
+    notes: Dated 2026-06-17/23; "hydra — fails G1:no-price G2:no-live-checkout. Fix: set a price (then A-candidate) OR designate a backlink asset for EOLkits".
+  - id: src-business-ops
+    kind: business-ops strategy hub (assets-for-sale/LISTING-COPY/hydra.md, MASTER-ASSET-INVENTORY.md, VALUATION-RATIONALE.md, PRIORITIZED-SALE-QUEUE.md; system-reconciliation/*)
+    class: retrospective
+    access: accessible
+    locator: /home/nick/Development/business-ops/assets-for-sale/LISTING-COPY/hydra.md
+    retrieved_at: 2026-09-04
+    notes: Dated 2026-06-22 (content from 2026-06-05); values HYDRA as a "template, not a product" with "17+ endpoints"; system registry calls it PILOT-READY for a RapidAPI freemium tier.
+  - id: src-launched-products-brief
+    kind: owner marketing resource-allocation brief (active/LAUNCHED_PRODUCTS_MARKETING_RESOURCE_ALLOCATION_BRIEF.md)
+    class: retrospective
+    access: accessible
+    locator: /home/nick/Development/active/LAUNCHED_PRODUCTS_MARKETING_RESOURCE_ALLOCATION_BRIEF.md
+    retrieved_at: 2026-09-04
+    notes: Generated 2026-06-26; allocates HYDRA 10-15%; "Live root reports 20 endpoints; local static site says 22 — verified discrepancy"; "Confirm HYDRA endpoint count and docs URL".
+  - id: src-icloud-ttllc-status
+    kind: owner status trackers synced from iCloud (TTLLC Status docs — MASTER_PORTFOLIO_TRACKER, ASSETS_TRACKER, DECISION_LOG, PRODUCT_CATALOG)
+    class: retrospective
+    access: accessible
+    locator: "/home/nick/Development/active/Mind/60 Sources/iCloud/Documents — TTLLC Status docs — trackers — MASTER_PORTFOLIO_TRACKER.md"
+    retrieved_at: 2026-09-04
+    notes: As of 2026-05-27; lists hydra-worker under backburner (dirty) and hydra-site under active ("purpose unclear — needs definition"). Searched only for the project's names.
+  - id: src-purge-2026-09
+    kind: credential-purge records (SECURITY_CLEANUP_REPORT.md; .unlazy/credential-cleanup/verification/*.json; discovery/history.md)
+    class: contemporaneous
+    access: accessible
+    locator: /home/nick/Development/SECURITY_CLEANUP_REPORT.md
+    retrieved_at: 2026-09-04
+    notes: Sanitised facts only. Two history pattern matches classified public configuration; no rewrite; GitHub secret scanning and push protection visibly enabled on this repository.
+  - id: src-leaf-brief-2026-09-04
+    kind: lead agent's dispatch brief for this reconstruction
+    class: contemporaneous
+    access: accessible
+    locator: /home/nick/Development/.unlazy/project-history/PLAN.md
+    retrieved_at: 2026-09-04
+    notes: Its first-run dirty baselines were cross-wired between hydra-worker and hydra-api; the corrected brief and the measured state (clean) agree.
+  - id: src-inaccessible-cloudflare-dashboard
+    kind: Cloudflare Workers dashboard — deployment history, request analytics, error rates
+    class: external
+    access: inaccessible
+    locator: https://dash.cloudflare.com (owner account; not opened)
+    retrieved_at: null
+    notes: Would settle the first deployment date (between 2026-03-26 and 2026-04-03), every later deploy, and whether anyone besides the owner's monitors has ever called the API.
+  - id: src-inaccessible-rapidapi
+    kind: RapidAPI provider dashboard / listing state
+    class: external
+    access: inaccessible
+    locator: https://rapidapi.com (owner account; not opened)
+    retrieved_at: null
+    notes: Would settle whether "RapidAPI: Listed for marketplace discovery" (README, 2026-04-03) was ever true.
+  - id: src-inaccessible-authoring-sessions
+    kind: AI-assistant sessions of 2026-03-26 (CascadeProjects directory) and of 2026-07-25 / 2026-09-01 (the consolidation edits and the snapshot commit authored as "AI Assistant")
+    class: external
+    access: inaccessible
+    locator: former /Users/…/CascadeProjects path (unlinked 2026-05-05); no transcripts on disk
+    retrieved_at: null
+    notes: Would reveal why two implementations were made the same night, why the edge won, and who directed the September snapshot.

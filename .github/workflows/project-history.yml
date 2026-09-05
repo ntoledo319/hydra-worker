@@ -1,0 +1,97 @@
+name: project-history
+
+# Guards the project-history ledgers of active/hydra-worker.
+# The repository has no other GitHub Actions workflow (its single run to date was the automatic Pages build of
+# 2026-04-03). This workflow only runs once these files are committed and pushed; nothing here claims it is active.
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+  schedule:
+    - cron: "23 6 1 * *"   # monthly history gardener (first day of the month, 06:23 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  history-check:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      # No `npm install`: the history tool has no dependencies.
+      - name: Detect history-only commit (prevents loops)
+        id: gate
+        run: |
+          subj="$(git log -1 --format=%s)"
+          if printf '%s\n' "$subj" | grep -Eq '^history:|^chore\(history\)|\[history-only\]'; then
+            echo "history_only=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "history_only=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Validate ledgers, schemas, ids, dates, anchors, secrets
+        run: node scripts/project_history.mjs validate --no-render-check
+      - name: Render drift check (committed output must already be rendered)
+        run: node scripts/project_history.mjs render --check
+      - name: History tool tests
+        run: node --test test/project_history_tests.mjs
+      - name: Secret scan over history artifacts (standalone)
+        run: |
+          node --input-type=module - <<'JS'
+          import { readFileSync, readdirSync, statSync } from "node:fs";
+          import { join } from "node:path";
+          import { scanSecrets } from "./scripts/project_history.mjs";
+          const files = [];
+          const walk = (p) => { for (const f of readdirSync(p)) { const q = join(p, f); statSync(q).isDirectory() ? walk(q) : files.push(q); } };
+          for (const base of ["docs/history", ".project-history"]) walk(base);
+          files.push("PROJECT_HISTORY.md", "AGENTS.md");
+          const hits = files.flatMap((f) => scanSecrets(readFileSync(f, "utf8")).map(([n, p]) => `${f}:${n} (${p}...)`));
+          console.log(hits.join("\n") || "secret scan clean");
+          process.exit(hits.length ? 1 : 0);
+          JS
+      - name: Incremental audit since the base of this change
+        if: steps.gate.outputs.history_only == 'false'
+        run: |
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ -z "$base" ] || ! git cat-file -e "$base^{commit}" 2>/dev/null; then base="HEAD~1"; fi
+          node scripts/project_history.mjs audit --since "$base"
+      - name: Advisory materiality assessment
+        if: steps.gate.outputs.history_only == 'false'
+        run: |
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ -z "$base" ] || ! git cat-file -e "$base^{commit}" 2>/dev/null; then base="HEAD~1"; fi
+          node scripts/project_history.mjs assess "$base..HEAD" || true
+      - name: Require exactly one history declaration in the PR body
+        if: github.event_name == 'pull_request' && steps.gate.outputs.history_only == 'false'
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: node scripts/project_history.mjs declaration --text "$PR_BODY"
+
+  history-gardener:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Full audit — broken citations, unreachable anchors, rewritten ranges, stale goals, open events, expired deferrals
+        run: node scripts/project_history.mjs audit --full --report .project-history/reports/gardener-drift.md
+      - name: Publish the single drift report as the run artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: history-gardener-drift-report
+          path: .project-history/reports/gardener-drift.md
+          retention-days: 90
+      # The gardener never commits, never authors prose, never deploys and never opens pull requests; it reports.
+      # Committing the report back would need `contents: write`, which is deliberately not granted.

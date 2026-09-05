@@ -1,0 +1,155 @@
+# Contradiction register — competing accounts preserved, not laundered.
+# disagreement_kind: fact | chronology | interpretation | motive | credit | outcome
+contradictions:
+  - id: hydra-worker-x1
+    disputed_claim: How many endpoints does HYDRA have?
+    disagreement_kind: fact
+    claim_ids: [hw-c09, hw-c05, hw-c06]
+    accounts:
+      - source_ids: [src-git-hydra-worker]
+        date: 2026-03-26
+        proximity: contemporaneous code
+        says: "src/index.js registers 26 routes (24 utilities plus / and /health); the / banner hard-codes endpoints 20."
+      - source_ids: [src-git-hydra-worker, src-gh-metadata]
+        date: 2026-04-03
+        proximity: contemporaneous documentation
+        says: "README title, badge and GitHub description say 22; the README's own 'All 22 Endpoints' table has 24 rows; openapi.json says '20+' and lists 26 paths; the playground says 22 and wires 17."
+      - source_ids: [src-tc-registry-hydra]
+        date: 2026-08-03
+        proximity: agent measurement, four months later
+        says: "'openapi.json paths = 25 entries (and it omits /time/convert/:ts)' — which is wrong against the committed file (26 paths, including /time/convert/{timestamp})."
+    best_supported_reading: 24 utility routes plus two meta routes; every published number is an unreconciled approximation, and one later audit added an error of its own.
+    confidence: confirmed
+    resolving_evidence: none needed; a README/banner/openapi reconciliation would close it.
+  - id: hydra-worker-x2
+    disputed_claim: Was HYDRA live in July 2026?
+    disagreement_kind: fact
+    claim_ids: [hw-c08, hw-c13]
+    accounts:
+      - source_ids: [src-tc-root-reports-2026-07]
+        date: 2026-07-20
+        proximity: owner-side planning
+        says: "'hydra-worker — LIVE — verify only (all confirmed 200)'."
+      - source_ids: [src-tc-root-reports-2026-07]
+        date: 2026-07-22
+        proximity: owner-side research note, two days later
+        says: "'hydra is NOT actually live (static backup repo, no deploy pipeline, its own registry says not deployed?)'."
+      - source_ids: [src-live-probe, src-tc-registry-hydra, src-tc-audit-2026-08]
+        date: 2026-08-03
+        proximity: measurement
+        says: HTTP 200 with Cloudflare headers on 2026-07-20, 2026-08-03, 2026-08-06 and 2026-09-04.
+    best_supported_reading: Live throughout; the 2026-07-22 note examined hydra-site (a static file) and the May manifest (url null), not the Worker.
+    confidence: confirmed
+    resolving_evidence: none needed; the consolidation of 2026-07-25 removed the ambiguity that caused it.
+  - id: hydra-worker-x3
+    disputed_claim: Is the Python/FastAPI repository this Worker's predecessor or a parallel variant?
+    disagreement_kind: chronology
+    claim_ids: [hw-c02, hw-c05, hw-c21]
+    accounts:
+      - source_ids: [src-git-hydra-api, src-git-hydra-worker]
+        date: 2026-03-26
+        proximity: contemporaneous machine record
+        says: The FastAPI root commit precedes this root by 75 minutes; this code is a route-for-route port; the banner links its docs back there.
+      - source_ids: [src-git-hydra-worker, src-tc-master-portfolio]
+        date: 2026-04-03
+        proximity: author, eight days after the event; owner portfolio in June
+        says: "'Also Available: Python/FastAPI version'; 'a parallel Python/FastAPI variant for a possible RapidAPI listing'."
+      - source_ids: [src-tc-registry-hydra]
+        date: 2026-08-03
+        proximity: agent-written, four months later
+        says: "'earlier Python/FastAPI predecessor … never deployed … Superseded/shelved'."
+    best_supported_reading: Chronologically the predecessor and functionally the source; strategically framed as a sibling; by outcome, shelved. All three are true of different things.
+    confidence: strongly_supported
+    resolving_evidence: The authoring session of 2026-03-26 or an owner statement about why two implementations were made the same night.
+  - id: hydra-worker-x4
+    disputed_claim: Is this a revenue asset?
+    disagreement_kind: interpretation
+    claim_ids: [hw-c10, hw-c12, hw-c22, hw-c23]
+    accounts:
+      - source_ids: [src-tc-meta-inventory-2026-05, src-git-hydra-worker]
+        date: 2026-05-05
+        proximity: owner tooling; committed 2026-09-01
+        says: ".toledo.yaml: type revenue."
+      - source_ids: [src-business-ops, src-marketing-arm]
+        date: 2026-06-17
+        proximity: owner strategy documents
+        says: "'PILOT-READY — RapidAPI freemium/metered' (business-ops) versus 'fails G1: no price set … a business-model decision, not a one-click fix' (marketing gate) versus 'price it like a template, not a product' (asset kit)."
+      - source_ids: [src-git-hydra-worker, src-tc-audit-2026-08]
+        date: 2026-08-06
+        proximity: code and measurement
+        says: No auth, no rate limit, no billing anywhere in code; "aspirational, not real revenue".
+    best_supported_reading: A free reference implementation carrying a revenue label that no document has turned into a price; the strategy documents disagree only about how to describe the gap.
+    confidence: confirmed
+    resolving_evidence: A decided price or a recorded decision to designate HYDRA a lead/backlink asset.
+  - id: hydra-worker-x5
+    disputed_claim: Which repository was "the HYDRA site"?
+    disagreement_kind: fact
+    claim_ids: [hw-c07, hw-c10, hw-c11, hw-c14]
+    accounts:
+      - source_ids: [src-icloud-ttllc-status, src-tc-root-reports-2026-07]
+        date: 2026-05-27
+        proximity: owner trackers and ship queue
+        says: "hydra-site (active/) is 'Web presence for the Hydra ecosystem', to be deployed to Cloudflare Pages; hydra-worker sits in backburner/."
+      - source_ids: [src-gh-metadata, src-live-probe]
+        date: 2026-04-03
+        proximity: machine record
+        says: The Worker's docs/index.html has been served by GitHub Pages since 2026-04-03 and hydra-site's only file is a byte-identical copy of it.
+      - source_ids: [src-git-hydra-worker, src-tc-workspace-registry]
+        date: 2026-07-25
+        proximity: enacted boundary
+        says: This repository owns the editable docs/index.html; hydra-site is a retired mirror under archive/duplicates.
+    best_supported_reading: The site was always this repository's docs/ folder; hydra-site was a backup that the owner's trackers mistook for the product for two months.
+    confidence: confirmed
+    resolving_evidence: none needed.
+  - id: hydra-worker-x6
+    disputed_claim: Is HYDRA listed on RapidAPI?
+    disagreement_kind: outcome
+    claim_ids: [hw-c05, hw-c23]
+    accounts:
+      - source_ids: [src-git-hydra-worker]
+        date: 2026-04-03
+        proximity: author's README
+        says: "'RapidAPI: Listed for marketplace discovery'."
+      - source_ids: [src-tc-audit-2026-08, src-marketing-arm, src-business-ops]
+        date: 2026-06-17
+        proximity: owner documents and audits
+        says: "'UNVERIFIED'; 'no price set'; 'not listed for sale; live as a free worker'; 'list hydra-worker on RapidAPI' still a next action in June."
+    best_supported_reading: Unknown; the only affirmative statement is a README line, and every later reviewer treats a listing as still to do.
+    confidence: unknown
+    resolving_evidence: The RapidAPI provider dashboard.
+  - id: hydra-worker-x7
+    disputed_claim: What should become of the repository?
+    disagreement_kind: interpretation
+    claim_ids: [hw-c15, hw-c22]
+    accounts:
+      - source_ids: [src-tc-audit-2026-08]
+        date: 2026-08-06
+        proximity: agent judgement
+        says: "PARK — 'a small, correct, genuinely-live utility API with no downside and no revenue mechanism'."
+      - source_ids: [src-tc-estate-audit-2026-08]
+        date: 2026-08-06
+        proximity: rule-generated verdict
+        says: "KILL — 'trivial: under 500 logical lines and under 10 commits'."
+      - source_ids: [src-business-ops, src-tc-registry-hydra]
+        date: 2026-06-22
+        proximity: owner strategy and registry
+        says: "'PILOT-READY … list on RapidAPI'; 'leave as-is (live, low-maintenance, $0)' after cheap credibility fixes."
+    best_supported_reading: Keep as a live, free, $0 demonstration; fix the counts, the banner link and the template test; decide the price question or drop the label. None of it has been done.
+    confidence: plausible
+    resolving_evidence: An owner decision recorded as a history event.
+  - id: hydra-worker-x8
+    disputed_claim: Does the repository have tests?
+    disagreement_kind: fact
+    claim_ids: [hw-c04, hw-c15]
+    accounts:
+      - source_ids: [src-tc-audit-2026-08, src-tc-estate-audit-2026-08, src-business-ops]
+        date: 2026-08-06
+        proximity: scanners and asset kit
+        says: "'Tests present: yes'; 'vitest config + tests present'; the asset listing sells 'vitest test setup'."
+      - source_ids: [src-git-hydra-worker, src-tc-registry-hydra]
+        date: 2026-08-03
+        proximity: code read
+        says: "test/index.spec.js is the untouched Cloudflare starter test asserting GET / returns 'Hello World!'; it cannot pass against this app."
+    best_supported_reading: A test file exists; a test of this product does not.
+    confidence: confirmed
+    resolving_evidence: none needed (static analysis; the suite was deliberately not executed during this reconstruction).

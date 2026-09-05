@@ -1,0 +1,88 @@
+# Versioned goal lifecycle. status: proposed | active | narrowed | expanded | blocked | achieved | abandoned | superseded.
+goals:
+  - id: g-port-and-deploy-edge
+    version: 1
+    status: achieved
+    introduced_at: 2026-03-26
+    achieved_at: 2026-04-03
+    statement: Re-express the 24 utility routes as a Cloudflare Worker and put them live on the free tier.
+    definition_of_success: A workers.dev URL answering every route.
+    achievement_note: Live URL published in the README on 2026-04-03; still answering 200 on 2026-09-04. The first deploy date between 2026-03-26 and 2026-04-03 is not recorded.
+    claim_ids: [hw-c01, hw-c02, hw-c05, hw-c08]
+    event_ids: [hydra-worker-2026-03-26-worker-port-and-first-deploy]
+    supersedes: null
+  - id: g-document-the-surface
+    version: 1
+    status: achieved
+    introduced_at: 2026-04-03
+    achieved_at: 2026-04-03
+    statement: Give the live API a README with every endpoint, an OpenAPI document and an interactive playground.
+    definition_of_success: A reader can find and try every endpoint without reading the source.
+    achievement_note: Achieved as artifacts; undermined by drift — 22/20+/20 against 24 routes, 17 of 24 endpoints in the playground, and a live banner that sends readers to the shelved Python repository (hydra-worker-x1).
+    claim_ids: [hw-c05, hw-c06, hw-c07, hw-c09]
+    event_ids: [hydra-worker-2026-04-03-readme-openapi-playground-and-pages]
+    supersedes: null
+  - id: g-rapidapi-discovery
+    version: 1
+    status: blocked
+    introduced_at: 2026-04-03
+    review_by: 2026-12-31
+    statement: Be discoverable on RapidAPI ("Listed for marketplace discovery"), possibly as a freemium tier.
+    definition_of_success: A published listing with at least a free tier and a decided price.
+    blocked_note: Marketing gate G1 fails on "no price set" (2026-06-17); business-ops still lists "list hydra-worker on RapidAPI" as a next action (2026-06-22); no listing has been evidenced (hw-c23).
+    claim_ids: [hw-c05, hw-c12, hw-c22, hw-c23]
+    event_ids: [hydra-worker-2026-04-03-readme-openapi-playground-and-pages, hydra-worker-2026-06-17-price-gate-and-asset-kit]
+    supersedes: null
+  - id: g-revenue-classification
+    version: 1
+    status: blocked
+    introduced_at: 2026-05-05
+    review_by: 2026-12-31
+    statement: Be a revenue asset (the manifest's type), by a freemium tier or as a sellable Worker template.
+    definition_of_success: Any paid usage, a listed price, or a template sale.
+    blocked_note: No auth, metering or billing exists; the asset kit prices it "like a template, not a product" with "no canonical price"; every audit calls the label aspirational.
+    claim_ids: [hw-c10, hw-c12, hw-c15, hw-c22]
+    event_ids: [hydra-worker-2026-05-05-backburner-then-active-reclassification, hydra-worker-2026-06-17-price-gate-and-asset-kit]
+    supersedes: null
+  - id: g-one-canonical-hydra
+    version: 1
+    status: achieved
+    introduced_at: 2026-07-24
+    achieved_at: 2026-07-25
+    statement: End the duplication between the Worker's docs/ and the standalone hydra-site by declaring one owner of the surface.
+    definition_of_success: A written boundary, the duplicate archived byte-identically, registries updated.
+    achievement_note: Enacted 2026-07-25 in the working tree and registries; committed locally 2026-09-01; not pushed, so the public repository does not yet carry the boundary.
+    claim_ids: [hw-c11, hw-c14, hw-c16]
+    event_ids: [hydra-worker-2026-07-25-source-of-truth-consolidation, hydra-worker-2026-09-01-snapshot-commit-license-and-manifest]
+    supersedes: null
+  - id: g-licence-file
+    version: 1
+    status: achieved
+    introduced_at: 2026-07-20
+    achieved_at: 2026-09-01
+    statement: Add the LICENSE file the README's MIT badge implies.
+    definition_of_success: LICENSE present in the tree and on GitHub.
+    achievement_note: Present in the tree and in the local snapshot commit; not on GitHub until that commit is pushed.
+    claim_ids: [hw-c13, hw-c16]
+    event_ids: [hydra-worker-2026-09-01-snapshot-commit-license-and-manifest]
+    supersedes: null
+  - id: g-reconcile-counts-and-links
+    version: 1
+    status: proposed
+    introduced_at: 2026-06-26
+    review_by: 2026-12-31
+    statement: Make the endpoint count consistent (README, badge, openapi.json, playground, live banner) and point the live banner's docs field at the real playground.
+    definition_of_success: One number everywhere; a caller following the API's own metadata lands on HYDRA's documentation.
+    claim_ids: [hw-c09, hw-c21]
+    event_ids: [hydra-worker-2026-08-06-audits-park-vs-kill]
+    supersedes: null
+  - id: g-real-test
+    version: 1
+    status: proposed
+    introduced_at: 2026-08-03
+    review_by: 2026-12-31
+    statement: Replace or delete the starter-template test so that "the normal Worker tests" in the source-of-truth note exist.
+    definition_of_success: A test that exercises at least the / banner and one utility route and passes.
+    claim_ids: [hw-c04]
+    event_ids: [hydra-worker-2026-08-06-audits-park-vs-kill]
+    supersedes: null

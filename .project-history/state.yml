@@ -1,0 +1,80 @@
+# Audit anchors and reproducibility metadata. Updated by the full/incremental audit process, never by render.
+repository: ntoledo319/hydra-worker
+local_path: /home/nick/Development/active/hydra-worker
+audit_date: 2026-09-04
+audit_tooling: "git 2.43.0, node v24.18.0, python3 3.12.3 (comparisons only), gh (read-only), curl; scripts/project_history.mjs"
+full_audit_anchor: 57154c55564897f96eebf558b14f51c24c0a80eb
+incremental_anchor: 57154c55564897f96eebf558b14f51c24c0a80eb
+root_commit: 2a804e67b5eb84bb52ddd4950fa41b0aa533959b
+head_at_audit: 57154c55564897f96eebf558b14f51c24c0a80eb
+branch_at_audit: master
+reachable_commit_count: 4
+refs_examined:
+  - refs/heads/master
+  - refs/remotes/origin/master
+remote_state_at_audit: "origin/master 6808ec82597245fd620b15a45f15483b67699d78 (git ls-remote 2026-09-04) is one commit behind local master 57154c55564897f96eebf558b14f51c24c0a80eb; the 2026-09-01 snapshot commit has not been pushed"
+clone_shape: full clone; not shallow, not partial, no stash, no notes, no submodules, no worktrees, reflog 4 entries
+exclusion_counts:
+  commits_total: 4
+  commits_deep_read: 4
+  generated_or_vendored_files_skipped: 1
+  binary_diffs_not_inspected: 0
+  history_only_commits: 0
+  uncommitted_paths_treated_as_present_tense: 0
+exclusion_notes: package-lock.json (2,788 lines in the root commit) was treated as generated and not read; every other line of every commit was read.
+source_classes:
+  direct: 5
+  contemporaneous: 3
+  retrospective: 12
+  behavioral: 2
+  external: 4
+  inferred: 0
+external_retrieval_dates:
+  github_api: 2026-09-04
+  live_probes: 2026-09-04
+  owner_documents: 2026-09-04
+inaccessible_sources:
+  - Cloudflare Workers dashboard (first deploy date, deploy history, request analytics)
+  - RapidAPI provider account (whether any HYDRA listing exists)
+  - AI-assistant sessions of 2026-03-26, 2026-07-25 and 2026-09-01 (intent behind the port, the consolidation and the snapshot commit)
+  - Any pre-repository design note; none was found in the owner's synced documents
+evidence_gaps:
+  - When the Worker was first deployed is bounded only by the root commit (2026-03-26) and the README's live URL (2026-04-03).
+  - Why the edge implementation won over the Python sibling is stated only as marketing copy (latency, cost), never as a decision.
+  - Whether the GitHub Pages playground was enabled deliberately or by default is unknown; no commit or document mentions enabling it.
+  - Who directed the 2026-07-25 consolidation edits and the 2026-09-01 snapshot commit (author "AI Assistant") is inferred from the owner's tooling, not recorded.
+  - Whether a RapidAPI listing ever existed is unknown.
+  - Whether anyone other than the owner's own monitors has ever called the API is unknown (no analytics in scope).
+rewritten_history: "no — the September 2026 credential purge classified this history's two pattern matches as public configuration, performed no rewrite, and origin/master still equals the 2026-04-03 tip; nothing in the reachable graph shows force-push or rebase evidence; the only divergence is one unpushed local commit"
+coverage_matrix:
+  eras:
+    - era: prehistory (NoHustle 2025-08; the unrecorded idea before 2026-03-26)
+      git: related repositories fully read
+      docs: owner reports read
+      external: GitHub metadata read
+      gaps: origin of the idea and the authoring prompt unrecorded
+    - era: the port and first deploy (2026-03-26..2026-04-03)
+      git: 3 of 3 commits deep-read (package-lock skipped)
+      docs: README, openapi.json, docs/index.html read
+      external: GitHub creation, push and Pages-build timestamps; live probes
+      gaps: first deploy date and intent behind the port inferred
+    - era: reclassification and framing by others (2026-05-05..2026-07-24)
+      git: no commits
+      docs: migration log, trackers, portfolio, asset kit, marketing gate, ship queue, deep research, synergy report read
+      external: hydra-site repository and metadata
+      gaps: why hydra-site was created and whether a Pages deploy of it was ever attempted
+    - era: consolidation, audits and the snapshot (2026-07-25..2026-09-01)
+      git: 1 of 1 commit deep-read
+      docs: SOURCE-OF-TRUTH.md, registry note, dossiers, overrides read
+      external: live probes
+      gaps: who directed the edits; the LICENSE file's creation date (between 2026-08-06 and 2026-09-01)
+    - era: purge and reconstruction (2026-09-02..2026-09-04)
+      git: refs and remote compared
+      docs: purge records read (sanitised)
+      external: GitHub security settings
+      gaps: none material
+completeness_statement: >-
+  All reachable Git objects, the four related repositories and every dated owner document naming HYDRA were reviewed.
+  That is not the same as knowing the project's full history: the design was made inside an AI-assisted session whose
+  transcript is unavailable, the Cloudflare and RapidAPI dashboards were not consulted, and the consolidation and
+  snapshot were enacted by agents whose instructions are not on disk.

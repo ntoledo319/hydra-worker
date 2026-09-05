@@ -6,7 +6,13 @@
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
-		"test": "vitest"
+		"test": "vitest",
+		"history:assess": "node scripts/project_history.mjs assess",
+		"history:context": "node scripts/project_history.mjs context",
+		"history:validate": "node scripts/project_history.mjs validate",
+		"history:render": "node scripts/project_history.mjs render",
+		"history:audit": "node scripts/project_history.mjs audit --full",
+		"history:test": "node --test test/project_history_tests.mjs"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.12.4",

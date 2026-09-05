@@ -1,0 +1,105 @@
+# Versioned principles. status: active | weakened | challenged | superseded | retired.
+# A new version of a principle must carry supersedes: {id, version} and the old version must be marked superseded.
+principles:
+  - id: p-edge-first
+    version: 1
+    status: active
+    introduced_at: 2026-03-26
+    introduced_by_event: hydra-worker-2026-03-26-worker-port-and-first-deploy
+    statement: >-
+      Run on the global edge at zero cost: a Cloudflare Worker on Hono, no origin server, no cold starts, "~50ms
+      worldwide", "$0 on Workers free tier".
+    revealed_by: wrangler.jsonc; the README's Tech Stack section; the Render blueprint left behind in the Python sibling
+    claim_ids: [hw-c01, hw-c02, hw-c08]
+    event_ids: [hydra-worker-2026-03-26-worker-port-and-first-deploy]
+    supersedes: null
+  - id: p-keyless-free
+    version: 1
+    status: challenged
+    introduced_at: 2026-03-26
+    introduced_by_event: hydra-worker-2026-03-26-worker-port-and-first-deploy
+    statement: No API key, no billing, no rate limit, open CORS; anyone may call any endpoint.
+    revealed_by: "app.use('*', cors()); no auth or metering code; README 'Free. No API key required.'"
+    challenged_by: the "type revenue" manifest (2026-05-05, committed 2026-09-01), the "freemium RapidAPI candidate" framing (June 2026) and the marketing gate's "set a price" — none of which changed the code
+    claim_ids: [hw-c03, hw-c10, hw-c12, hw-c22]
+    event_ids: [hydra-worker-2026-03-26-worker-port-and-first-deploy, hydra-worker-2026-06-17-price-gate-and-asset-kit]
+    supersedes: null
+  - id: p-stateless-pure
+    version: 1
+    status: active
+    introduced_at: 2026-03-26
+    introduced_by_event: hydra-worker-2026-03-26-worker-port-and-first-deploy
+    statement: Every handler is a pure function of its request — no bindings, no storage, no outbound calls; the Worker can be redeployed anywhere from one file.
+    revealed_by: src/index.js; wrangler.jsonc with every binding commented out
+    claim_ids: [hw-c03, hw-c25]
+    event_ids: [hydra-worker-2026-03-26-worker-port-and-first-deploy]
+    supersedes: null
+  - id: p-zero-deps-beyond-hono
+    version: 1
+    status: active
+    introduced_at: 2026-03-26
+    introduced_by_event: hydra-worker-2026-03-26-worker-port-and-first-deploy
+    statement: One runtime dependency (Hono); Web Crypto and hand-rolled helpers for everything else, including MD5.
+    revealed_by: package.json dependencies; README "Zero dependencies beyond Hono"
+    claim_ids: [hw-c01, hw-c05]
+    event_ids: [hydra-worker-2026-03-26-worker-port-and-first-deploy]
+    supersedes: null
+  - id: p-curated-documentation
+    version: 1
+    status: weakened
+    introduced_at: 2026-04-03
+    introduced_by_event: hydra-worker-2026-04-03-readme-openapi-playground-and-pages
+    statement: >-
+      Documentation is a hand-written artifact — a README table, an openapi.json and an HTML playground — rather than
+      something generated from types, as the Python sibling had it.
+    revealed_by: openapi.json (257 lines) and docs/index.html (176 lines) committed by hand; no generator in the tree
+    weakened_note: The hand-written artifacts drifted from the code (counts of 22, 20+, 20 against 24; 17 of 24 endpoints wired into the playground) and were never reconciled.
+    claim_ids: [hw-c05, hw-c06, hw-c09]
+    event_ids: [hydra-worker-2026-04-03-readme-openapi-playground-and-pages]
+    supersedes: null
+  - id: p-licence-mit
+    version: 1
+    status: superseded
+    introduced_at: 2026-04-03
+    introduced_by_event: hydra-worker-2026-04-03-readme-openapi-playground-and-pages
+    statement: MIT — claimed in the README badge and footer ("use it however you want") without a LICENSE file.
+    revealed_by: README.md at 465f28476f262c580f8e9a10638851209cafe88c; docs/index.html footer
+    superseded_note: Flagged on 2026-07-20 ("MIT claimed with no LICENSE file"); a LICENSE file was added to the tree by 2026-09-01 (v2).
+    claim_ids: [hw-c05, hw-c13]
+    event_ids: [hydra-worker-2026-04-03-readme-openapi-playground-and-pages]
+    supersedes: null
+  - id: p-licence-mit
+    version: 2
+    status: active
+    introduced_at: 2026-09-01
+    introduced_by_event: hydra-worker-2026-09-01-snapshot-commit-license-and-manifest
+    statement: MIT, with a LICENSE file (copyright 2026 Toledo Technologies LLC) committed — locally, not yet pushed.
+    revealed_by: LICENSE at 57154c55564897f96eebf558b14f51c24c0a80eb
+    claim_ids: [hw-c16]
+    event_ids: [hydra-worker-2026-09-01-snapshot-commit-license-and-manifest]
+    supersedes:
+      id: p-licence-mit
+      version: 1
+  - id: p-single-source-of-truth
+    version: 1
+    status: active
+    introduced_at: 2026-07-25
+    introduced_by_event: hydra-worker-2026-07-25-source-of-truth-consolidation
+    statement: >-
+      This repository owns the Worker code, the OpenAPI description, operator documentation and the editable
+      docs/index.html; mirrors are archived as historical baselines, never spliced or synced.
+    revealed_by: docs/SOURCE-OF-TRUTH.md; the README note; workspace overrides (canonical_status canonical; retired-mirror for hydra-site)
+    claim_ids: [hw-c14]
+    event_ids: [hydra-worker-2026-07-25-source-of-truth-consolidation]
+    supersedes: null
+  - id: p-explicit-deploy-decision
+    version: 1
+    status: active
+    introduced_at: 2026-07-25
+    introduced_by_event: hydra-worker-2026-07-25-source-of-truth-consolidation
+    statement: Local source changes never authorise a Cloudflare deployment; new surface work requires the normal Worker tests and an explicit deployment decision.
+    revealed_by: docs/SOURCE-OF-TRUTH.md last paragraph; project-overrides.json known_risks
+    challenged_by: the "normal Worker tests" do not exist — the only test is the starter template (hydra-worker-x8)
+    claim_ids: [hw-c14, hw-c04]
+    event_ids: [hydra-worker-2026-07-25-source-of-truth-consolidation]
+    supersedes: null
