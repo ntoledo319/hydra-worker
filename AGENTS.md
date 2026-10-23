@@ -26,6 +26,6 @@ Commands: `assess`, `context`, `validate`, `render`, `audit --full`, `audit --si
 
 - The code has 24 utility routes plus `/` and `/health`. "22" (README, badge, playground), "20+" (openapi.json) and "20" (live banner) are all approximations; do not propagate any of them without counting.
 - The live `/` banner links `docs` to the shelved Python repository (`hydra-toolkit-api`), not to this repository's playground.
-- `test/index.spec.js` is the untouched Cloudflare starter test and cannot pass against this app; do not cite it as evidence of coverage.
+- `test/index.spec.js` now covers transport hardening and real API behavior (nine passing Worker tests, 2026-10-23); it is not exhaustive coverage of every utility.
 - Local `master` is one unpushed commit (the 2026-09-01 snapshot: LICENSE, `.toledo.yaml`, source-of-truth note) ahead of `origin/master`. Pushing is an owner decision.
 - `.toledo.yaml` is committed and records the original macOS path; treat it as portfolio metadata, not configuration.

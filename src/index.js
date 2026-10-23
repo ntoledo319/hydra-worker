@@ -2,6 +2,20 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 
 const app = new Hono();
+// Enforce transport before CORS or route handlers can process request data.
+app.use('*', async (c, next) => {
+  const url = new URL(c.req.url);
+  c.header('X-Content-Type-Options', 'nosniff');
+  c.header('X-Frame-Options', 'DENY');
+  c.header('Referrer-Policy', 'no-referrer');
+  c.header('Content-Security-Policy', "default-src 'none'; frame-ancestors 'none'; base-uri 'none'");
+  if (url.protocol === 'http:') {
+    url.protocol = 'https:';
+    return c.redirect(url.toString(), 308);
+  }
+  c.header('Strict-Transport-Security', 'max-age=15552000');
+  await next();
+});
 app.use('*', cors());
 
 // ─── HEALTH ────────────────────────────────────────

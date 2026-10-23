@@ -56,6 +56,10 @@ Reading the rows: `occurred` / `decided` / `merged` / `released` are the distinc
 | 2026-09-04 | claim | `hw-c26` | The repository has no tags, releases, issues or pull requests; the API reports version 1.0.0 and package.json | `.project-history/claims.yml` |
 | 2026-09-04 | decided | `hydra-worker-2026-09-04-history-system-bootstrap` | Bootstrap of the project-history system (reconstruction and maintenance mechanism) | `.project-history/events/2026/hydra-worker-2026-09-04-history-system-bootstrap.md` |
 | 2026-09-04 | occurred | `hydra-worker-2026-09-04-history-system-bootstrap` | Bootstrap of the project-history system (reconstruction and maintenance mechanism) | `.project-history/events/2026/hydra-worker-2026-09-04-history-system-bootstrap.md` |
+| 2026-10-23 | claim | `hw-c27` | HTTP redirects before utility processing and HTTPS receives API security headers; nine real Worker tests pass. | `.project-history/claims.yml` |
+| 2026-10-23 | decided | `hydra-worker-2026-10-23-https-hardening` | Require HTTPS and establish real Worker regression coverage | `.project-history/events/2026/hydra-worker-2026-10-23-https-hardening.md` |
+| 2026-10-23 | occurred | `hydra-worker-2026-10-23-https-hardening` | Require HTTPS and establish real Worker regression coverage | `.project-history/events/2026/hydra-worker-2026-10-23-https-hardening.md` |
+| 2026-10-23 | released | `hydra-worker-2026-10-23-https-hardening` | Require HTTPS and establish real Worker regression coverage | `.project-history/events/2026/hydra-worker-2026-10-23-https-hardening.md` |
 
 ### Git anchors cited by events
 

@@ -77,6 +77,7 @@ _Each genealogy follows `pressure → belief → alternatives → decision → i
 | `hydra-worker-2026-09-01-snapshot-commit-license-and-manifest` | licence | medium | 2026-09-01 | closed | `hydra-worker-2026-07-25-source-of-truth-consolidation`, `hydra-worker-2026-08-06-audits-park-vs-kill`, `hydra-worker-2026-09-02-credential-purge-untouched` | — |
 | `hydra-worker-2026-09-02-credential-purge-untouched` | security | medium | 2026-09-02 | closed | `hydra-worker-2026-09-01-snapshot-commit-license-and-manifest`, `hydra-worker-2026-09-04-history-system-bootstrap` | — |
 | `hydra-worker-2026-09-04-history-system-bootstrap` | bootstrap | medium | 2026-09-04 | closed | `hydra-worker-2026-09-02-credential-purge-untouched` | — |
+| `hydra-worker-2026-10-23-https-hardening` | security | medium | 2026-10-23 | closed | `hydra-worker-2026-08-06-audits-park-vs-kill` | — |
 
 #### Principles (versioned)
 
@@ -103,5 +104,5 @@ _Each genealogy follows `pressure → belief → alternatives → decision → i
 | `g-one-canonical-hydra` | 1 | achieved | 2026-07-24 | — | — | End the duplication between the Worker's docs/ and the standalone hydra-site by declaring one owner of the surface. |
 | `g-licence-file` | 1 | achieved | 2026-07-20 | — | — | Add the LICENSE file the README's MIT badge implies. |
 | `g-reconcile-counts-and-links` | 1 | proposed | 2026-06-26 | 2026-12-31 | — | Make the endpoint count consistent (README, badge, openapi.json, playground, live banner) and point the live banner's docs field at the real playground. |
-| `g-real-test` | 1 | proposed | 2026-08-03 | 2026-12-31 | — | Replace or delete the starter-template test so that "the normal Worker tests" in the source-of-truth note exist. |
+| `g-real-test` | 1 | achieved | 2026-08-03 | — | — | Replace or delete the starter-template test so that "the normal Worker tests" in the source-of-truth note exist. |
 <!-- END GENERATED: decision-index -->

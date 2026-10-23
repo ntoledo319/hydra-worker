@@ -1,5 +1,7 @@
 # Orientation — HYDRA Developer Toolkit (`active/hydra-worker`)
 
+**2026-10-23 security update:** HTTP redirect and API header hardening are live on Worker version `8e7b8ebe-f182-4066-8170-7599e677d13b`, verified with nine Worker tests and four live checks. Goal `g-real-test` is achieved. The dated September snapshot below remains historical; its starter-test and clean-tree statements no longer describe current source. See `hydra-worker-2026-10-23-https-hardening`.
+
 _Present-tense briefing as of the audit date 2026-09-04. Everything here is what is true **now**; the history that produced it lives in the chapters that follow. Read this file first; then read `NARRATIVE.md`._
 
 ## What this repository is

@@ -20,6 +20,8 @@ _Canonical, unabridged reading path. Assembled deterministically by `scripts/pro
 
 ## Orientation — HYDRA Developer Toolkit (`active/hydra-worker`)
 
+**2026-10-23 security update:** HTTP redirect and API header hardening are live on Worker version `8e7b8ebe-f182-4066-8170-7599e677d13b`, verified with nine Worker tests and four live checks. Goal `g-real-test` is achieved. The dated September snapshot below remains historical; its starter-test and clean-tree statements no longer describe current source. See `hydra-worker-2026-10-23-https-hardening`.
+
 _Present-tense briefing as of the audit date 2026-09-04. Everything here is what is true **now**; the history that produced it lives in the chapters that follow. Read this file first; then read `NARRATIVE.md`._
 
 ### What this repository is
@@ -389,6 +391,7 @@ _Each genealogy follows `pressure → belief → alternatives → decision → i
 | `hydra-worker-2026-09-01-snapshot-commit-license-and-manifest` | licence | medium | 2026-09-01 | closed | `hydra-worker-2026-07-25-source-of-truth-consolidation`, `hydra-worker-2026-08-06-audits-park-vs-kill`, `hydra-worker-2026-09-02-credential-purge-untouched` | — |
 | `hydra-worker-2026-09-02-credential-purge-untouched` | security | medium | 2026-09-02 | closed | `hydra-worker-2026-09-01-snapshot-commit-license-and-manifest`, `hydra-worker-2026-09-04-history-system-bootstrap` | — |
 | `hydra-worker-2026-09-04-history-system-bootstrap` | bootstrap | medium | 2026-09-04 | closed | `hydra-worker-2026-09-02-credential-purge-untouched` | — |
+| `hydra-worker-2026-10-23-https-hardening` | security | medium | 2026-10-23 | closed | `hydra-worker-2026-08-06-audits-park-vs-kill` | — |
 
 ##### Principles (versioned)
 
@@ -415,7 +418,7 @@ _Each genealogy follows `pressure → belief → alternatives → decision → i
 | `g-one-canonical-hydra` | 1 | achieved | 2026-07-24 | — | — | End the duplication between the Worker's docs/ and the standalone hydra-site by declaring one owner of the surface. |
 | `g-licence-file` | 1 | achieved | 2026-07-20 | — | — | Add the LICENSE file the README's MIT badge implies. |
 | `g-reconcile-counts-and-links` | 1 | proposed | 2026-06-26 | 2026-12-31 | — | Make the endpoint count consistent (README, badge, openapi.json, playground, live banner) and point the live banner's docs field at the real playground. |
-| `g-real-test` | 1 | proposed | 2026-08-03 | 2026-12-31 | — | Replace or delete the starter-template test so that "the normal Worker tests" in the source-of-truth note exist. |
+| `g-real-test` | 1 | achieved | 2026-08-03 | — | — | Replace or delete the starter-template test so that "the normal Worker tests" in the source-of-truth note exist. |
 <!-- END GENERATED: decision-index -->
 
 ## Chapter: TIMELINE.md
@@ -478,6 +481,10 @@ Reading the rows: `occurred` / `decided` / `merged` / `released` are the distinc
 | 2026-09-04 | claim | `hw-c26` | The repository has no tags, releases, issues or pull requests; the API reports version 1.0.0 and package.json | `.project-history/claims.yml` |
 | 2026-09-04 | decided | `hydra-worker-2026-09-04-history-system-bootstrap` | Bootstrap of the project-history system (reconstruction and maintenance mechanism) | `.project-history/events/2026/hydra-worker-2026-09-04-history-system-bootstrap.md` |
 | 2026-09-04 | occurred | `hydra-worker-2026-09-04-history-system-bootstrap` | Bootstrap of the project-history system (reconstruction and maintenance mechanism) | `.project-history/events/2026/hydra-worker-2026-09-04-history-system-bootstrap.md` |
+| 2026-10-23 | claim | `hw-c27` | HTTP redirects before utility processing and HTTPS receives API security headers; nine real Worker tests pass. | `.project-history/claims.yml` |
+| 2026-10-23 | decided | `hydra-worker-2026-10-23-https-hardening` | Require HTTPS and establish real Worker regression coverage | `.project-history/events/2026/hydra-worker-2026-10-23-https-hardening.md` |
+| 2026-10-23 | occurred | `hydra-worker-2026-10-23-https-hardening` | Require HTTPS and establish real Worker regression coverage | `.project-history/events/2026/hydra-worker-2026-10-23-https-hardening.md` |
+| 2026-10-23 | released | `hydra-worker-2026-10-23-https-hardening` | Require HTTPS and establish real Worker regression coverage | `.project-history/events/2026/hydra-worker-2026-10-23-https-hardening.md` |
 
 #### Git anchors cited by events
 
@@ -579,6 +586,7 @@ All four reachable commits were deep-read (the lockfile excepted); both refs exa
 | `hw-c24` | 2026-09-04 | behavioral | verified | confirmed | The working tree was clean at the start of the reconstruction (git status empty; reflog 4 entries; no stash); the lead's first dispatch brief had assigned the Python sibling's dirty set to this repository, and the corrected brief and the measured state agree. Nothing here was modified, staged, committed or pushed by the reconstruction beyond the history artifacts. |
 | `hw-c25` | 2026-03-26 | direct | verified | confirmed | The runtime configuration is wrangler's generated template with only the name and entry point filled in: compatibility_date 2025-09-27 (six months before the project existed), observability enabled, source maps uploaded, nodejs_compat, every binding, variable, asset and service example left commented out. |
 | `hw-c26` | 2026-09-04 | behavioral | verified | confirmed | The repository has no tags, releases, issues or pull requests; the API reports version 1.0.0 and package.json 0.0.0; no version has ever changed; the only mechanism that has ever run on GitHub for it is the Pages build. |
+| `hw-c27` | 2026-10-23 | behavioral | verified | confirmed | HTTP redirects before utility processing and HTTPS receives API security headers; nine real Worker tests pass. |
 
 ## Appendix B — Contradiction register
 
@@ -682,6 +690,7 @@ All four reachable commits were deep-read (the lockfile excepted); both refs exa
 | `src-inaccessible-cloudflare-dashboard` | Cloudflare Workers dashboard — deployment history, request analytics, error rates | external | inaccessible | — | https://dash.cloudflare.com (owner account; not opened) |
 | `src-inaccessible-rapidapi` | RapidAPI provider dashboard / listing state | external | inaccessible | — | https://rapidapi.com (owner account; not opened) |
 | `src-inaccessible-authoring-sessions` | AI-assistant sessions of 2026-03-26 (CascadeProjects directory) and of 2026-07-25 / 2026-09-01 (the consolidation edits and the snapshot commit authored as "AI Assistant") | external | inaccessible | — | former /Users/…/CascadeProjects path (unlinked 2026-05-05); no transcripts on disk |
+| `src-security-verification-2026-10-23` | local Worker security verification | behavioral | accessible | 2026-10-23 | test/index.spec.js |
 
 ## Appendix D — Coverage and reproducibility
 
@@ -689,7 +698,7 @@ All four reachable commits were deep-read (the lockfile excepted); both refs exa
 - **audit_date:** 2026-09-04
 - **full_audit_anchor:** 57154c55564897f96eebf558b14f51c24c0a80eb
 - **incremental_anchor:** 57154c55564897f96eebf558b14f51c24c0a80eb
-- **reachable_commit_count:** 4
+- **reachable_commit_count:** 6
 - **refs_examined:**
   - refs/heads/master
   - refs/remotes/origin/master

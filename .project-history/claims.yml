@@ -366,3 +366,13 @@ claims:
     confidence: confirmed
     rationale: Read-only API and source on the audit date.
     caveats: none
+  - claim_id: hw-c27
+    claim: HTTP redirects before utility processing and HTTPS receives API security headers; nine real Worker tests pass.
+    date: 2026-10-23
+    source_ids: [src-security-verification-2026-10-23]
+    locator: src/index.js; test/index.spec.js; npm test -- --run; wrangler deploy --dry-run
+    evidence_type: behavioral
+    status: verified
+    confidence: confirmed
+    rationale: Actual Worker runtime assertions and production bundling passed.
+    caveats: Nine tests establish transport and representative route coverage, not exhaustive utility correctness.
