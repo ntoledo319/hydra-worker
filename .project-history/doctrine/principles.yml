@@ -103,3 +103,13 @@ principles:
     claim_ids: [hw-c14, hw-c04]
     event_ids: [hydra-worker-2026-07-25-source-of-truth-consolidation]
     supersedes: null
+  - id: p-pages-minimal-browser-policy
+    version: 1
+    status: active
+    introduced_at: 2026-10-24
+    introduced_by_event: hydra-worker-2026-10-24-pages-browser-policy
+    statement: Apply a minimal document CSP and referrer policy on free Pages hosting without blocking working scripts/styles/API calls or claiming unsupported response-header protection.
+    revealed_by: docs/index.html early security metadata
+    claim_ids: [hw-c28]
+    event_ids: [hydra-worker-2026-10-24-pages-browser-policy]
+    supersedes: null

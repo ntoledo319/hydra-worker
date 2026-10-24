@@ -73,3 +73,7 @@ The workspace-wide credential purge of early September rewrote eighteen owned re
 - Two unadopted verdicts and one open event awaiting an owner decision (`hw-c15`).
 - A runtime pinned to a compatibility date six months older than the project (`hw-c25`).
 - Four repositories' worth of family cross-references that run one way (`hw-c21`).
+
+## October 2026: a narrow browser policy for Pages
+
+The website hardening follow-up added object/base restrictions and referrer metadata to the public playground (`hw-c28`, `hydra-worker-2026-10-24-pages-browser-policy`). The existing document and inline playground behavior remain intact. This is a source-level improvement within free Pages hosting; it does not claim frame-ancestor or other HTTP-header controls that metadata cannot enforce. Live publication is verified separately.

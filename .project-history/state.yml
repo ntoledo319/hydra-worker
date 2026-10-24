@@ -8,7 +8,7 @@ incremental_anchor: 57154c55564897f96eebf558b14f51c24c0a80eb
 root_commit: 2a804e67b5eb84bb52ddd4950fa41b0aa533959b
 head_at_audit: 57154c55564897f96eebf558b14f51c24c0a80eb
 branch_at_audit: master
-reachable_commit_count: 4
+reachable_commit_count: 6
 refs_examined:
   - refs/heads/master
   - refs/remotes/origin/master

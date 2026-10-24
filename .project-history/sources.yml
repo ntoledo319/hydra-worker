@@ -28,7 +28,7 @@ sources:
     kind: git repository (related; retired static mirror of docs/index.html)
     class: direct
     access: accessible
-    local_path: /home/nick/Development/archive/duplicates/hydra-site
+    local_path: /home/nick/Development/archive/_dupes/hydra-site
     locator: https://github.com/ntoledo319/hydra-site.git
     retrieved_at: 2026-09-04
     notes: Single commit 2026-05-28; public/index.html sha256 dfbcface41ac83c2ecb6643df1874c46550e87153cf3459df46cc3f19ed26678, identical to docs/index.html here (re-verified 2026-09-04).
@@ -200,3 +200,10 @@ sources:
     locator: former /Users/…/CascadeProjects path (unlinked 2026-05-05); no transcripts on disk
     retrieved_at: null
     notes: Would reveal why two implementations were made the same night, why the edge won, and who directed the September snapshot.
+  - id: src-pages-policy-2026-10-24
+    kind: playground metadata source and validation
+    class: behavioral
+    access: accessible
+    locator: docs/index.html; history render and validate; exact metadata-only diff
+    retrieved_at: 2026-10-24
+    notes: Two early metadata declarations; existing scripts, styles, links and API behavior preserved.

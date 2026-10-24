@@ -366,3 +366,13 @@ claims:
     confidence: confirmed
     rationale: Read-only API and source on the audit date.
     caveats: none
+  - claim_id: hw-c28
+    claim: The Pages playground source adds only early object/base CSP and referrer metadata, preserving existing script and style behavior.
+    date: 2026-10-24
+    source_ids: [src-pages-policy-2026-10-24]
+    locator: docs/index.html head metadata and exact two-line source diff
+    evidence_type: direct
+    status: verified
+    confidence: confirmed
+    rationale: HTML parsing and exact removal comparison preserve the original document bytes.
+    caveats: Source verification does not establish live publication or arbitrary HTTP response headers.

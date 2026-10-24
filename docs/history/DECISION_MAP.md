@@ -77,6 +77,7 @@ _Each genealogy follows `pressure → belief → alternatives → decision → i
 | `hydra-worker-2026-09-01-snapshot-commit-license-and-manifest` | licence | medium | 2026-09-01 | closed | `hydra-worker-2026-07-25-source-of-truth-consolidation`, `hydra-worker-2026-08-06-audits-park-vs-kill`, `hydra-worker-2026-09-02-credential-purge-untouched` | — |
 | `hydra-worker-2026-09-02-credential-purge-untouched` | security | medium | 2026-09-02 | closed | `hydra-worker-2026-09-01-snapshot-commit-license-and-manifest`, `hydra-worker-2026-09-04-history-system-bootstrap` | — |
 | `hydra-worker-2026-09-04-history-system-bootstrap` | bootstrap | medium | 2026-09-04 | closed | `hydra-worker-2026-09-02-credential-purge-untouched` | — |
+| `hydra-worker-2026-10-24-pages-browser-policy` | security | medium | 2026-10-24 | closed | `hydra-worker-2026-04-03-readme-openapi-playground-and-pages` | — |
 
 #### Principles (versioned)
 
@@ -91,6 +92,7 @@ _Each genealogy follows `pressure → belief → alternatives → decision → i
 | `p-licence-mit` | 2 | active | 2026-09-01 | `p-licence-mit` v1 | MIT, with a LICENSE file (copyright 2026 Toledo Technologies LLC) committed — locally, not yet pushed. |
 | `p-single-source-of-truth` | 1 | active | 2026-07-25 | — | This repository owns the Worker code, the OpenAPI description, operator documentation and the editable docs/index.html; mirrors are archived as historical baselines, never spliced or synced. |
 | `p-explicit-deploy-decision` | 1 | active | 2026-07-25 | — | Local source changes never authorise a Cloudflare deployment; new surface work requires the normal Worker tests and an explicit deployment decision. |
+| `p-pages-minimal-browser-policy` | 1 | active | 2026-10-24 | — | Apply a minimal document CSP and referrer policy on free Pages hosting without blocking working scripts/styles/API calls or claiming unsupported response-header protection. |
 
 #### Goals (lifecycle)
 

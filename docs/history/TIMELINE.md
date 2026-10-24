@@ -56,6 +56,9 @@ Reading the rows: `occurred` / `decided` / `merged` / `released` are the distinc
 | 2026-09-04 | claim | `hw-c26` | The repository has no tags, releases, issues or pull requests; the API reports version 1.0.0 and package.json | `.project-history/claims.yml` |
 | 2026-09-04 | decided | `hydra-worker-2026-09-04-history-system-bootstrap` | Bootstrap of the project-history system (reconstruction and maintenance mechanism) | `.project-history/events/2026/hydra-worker-2026-09-04-history-system-bootstrap.md` |
 | 2026-09-04 | occurred | `hydra-worker-2026-09-04-history-system-bootstrap` | Bootstrap of the project-history system (reconstruction and maintenance mechanism) | `.project-history/events/2026/hydra-worker-2026-09-04-history-system-bootstrap.md` |
+| 2026-10-24 | claim | `hw-c28` | The Pages playground source adds only early object/base CSP and referrer metadata, preserving existing script | `.project-history/claims.yml` |
+| 2026-10-24 | decided | `hydra-worker-2026-10-24-pages-browser-policy` | Add minimal browser policy to the Pages playground | `.project-history/events/2026/hydra-worker-2026-10-24-pages-browser-policy.md` |
+| 2026-10-24 | occurred | `hydra-worker-2026-10-24-pages-browser-policy` | Add minimal browser policy to the Pages playground | `.project-history/events/2026/hydra-worker-2026-10-24-pages-browser-policy.md` |
 
 ### Git anchors cited by events
 

@@ -160,6 +160,10 @@ The workspace-wide credential purge of early September rewrote eighteen owned re
 - A runtime pinned to a compatibility date six months older than the project (`hw-c25`).
 - Four repositories' worth of family cross-references that run one way (`hw-c21`).
 
+### October 2026: a narrow browser policy for Pages
+
+The website hardening follow-up added object/base restrictions and referrer metadata to the public playground (`hw-c28`, `hydra-worker-2026-10-24-pages-browser-policy`). The existing document and inline playground behavior remain intact. This is a source-level improvement within free Pages hosting; it does not claim frame-ancestor or other HTTP-header controls that metadata cannot enforce. Live publication is verified separately.
+
 ## Chapter: IDEOLOGY.md
 
 ## Ideology — the worldview this code reveals
@@ -389,6 +393,7 @@ _Each genealogy follows `pressure → belief → alternatives → decision → i
 | `hydra-worker-2026-09-01-snapshot-commit-license-and-manifest` | licence | medium | 2026-09-01 | closed | `hydra-worker-2026-07-25-source-of-truth-consolidation`, `hydra-worker-2026-08-06-audits-park-vs-kill`, `hydra-worker-2026-09-02-credential-purge-untouched` | — |
 | `hydra-worker-2026-09-02-credential-purge-untouched` | security | medium | 2026-09-02 | closed | `hydra-worker-2026-09-01-snapshot-commit-license-and-manifest`, `hydra-worker-2026-09-04-history-system-bootstrap` | — |
 | `hydra-worker-2026-09-04-history-system-bootstrap` | bootstrap | medium | 2026-09-04 | closed | `hydra-worker-2026-09-02-credential-purge-untouched` | — |
+| `hydra-worker-2026-10-24-pages-browser-policy` | security | medium | 2026-10-24 | closed | `hydra-worker-2026-04-03-readme-openapi-playground-and-pages` | — |
 
 ##### Principles (versioned)
 
@@ -403,6 +408,7 @@ _Each genealogy follows `pressure → belief → alternatives → decision → i
 | `p-licence-mit` | 2 | active | 2026-09-01 | `p-licence-mit` v1 | MIT, with a LICENSE file (copyright 2026 Toledo Technologies LLC) committed — locally, not yet pushed. |
 | `p-single-source-of-truth` | 1 | active | 2026-07-25 | — | This repository owns the Worker code, the OpenAPI description, operator documentation and the editable docs/index.html; mirrors are archived as historical baselines, never spliced or synced. |
 | `p-explicit-deploy-decision` | 1 | active | 2026-07-25 | — | Local source changes never authorise a Cloudflare deployment; new surface work requires the normal Worker tests and an explicit deployment decision. |
+| `p-pages-minimal-browser-policy` | 1 | active | 2026-10-24 | — | Apply a minimal document CSP and referrer policy on free Pages hosting without blocking working scripts/styles/API calls or claiming unsupported response-header protection. |
 
 ##### Goals (lifecycle)
 
@@ -478,6 +484,9 @@ Reading the rows: `occurred` / `decided` / `merged` / `released` are the distinc
 | 2026-09-04 | claim | `hw-c26` | The repository has no tags, releases, issues or pull requests; the API reports version 1.0.0 and package.json | `.project-history/claims.yml` |
 | 2026-09-04 | decided | `hydra-worker-2026-09-04-history-system-bootstrap` | Bootstrap of the project-history system (reconstruction and maintenance mechanism) | `.project-history/events/2026/hydra-worker-2026-09-04-history-system-bootstrap.md` |
 | 2026-09-04 | occurred | `hydra-worker-2026-09-04-history-system-bootstrap` | Bootstrap of the project-history system (reconstruction and maintenance mechanism) | `.project-history/events/2026/hydra-worker-2026-09-04-history-system-bootstrap.md` |
+| 2026-10-24 | claim | `hw-c28` | The Pages playground source adds only early object/base CSP and referrer metadata, preserving existing script | `.project-history/claims.yml` |
+| 2026-10-24 | decided | `hydra-worker-2026-10-24-pages-browser-policy` | Add minimal browser policy to the Pages playground | `.project-history/events/2026/hydra-worker-2026-10-24-pages-browser-policy.md` |
+| 2026-10-24 | occurred | `hydra-worker-2026-10-24-pages-browser-policy` | Add minimal browser policy to the Pages playground | `.project-history/events/2026/hydra-worker-2026-10-24-pages-browser-policy.md` |
 
 #### Git anchors cited by events
 
@@ -579,6 +588,7 @@ All four reachable commits were deep-read (the lockfile excepted); both refs exa
 | `hw-c24` | 2026-09-04 | behavioral | verified | confirmed | The working tree was clean at the start of the reconstruction (git status empty; reflog 4 entries; no stash); the lead's first dispatch brief had assigned the Python sibling's dirty set to this repository, and the corrected brief and the measured state agree. Nothing here was modified, staged, committed or pushed by the reconstruction beyond the history artifacts. |
 | `hw-c25` | 2026-03-26 | direct | verified | confirmed | The runtime configuration is wrangler's generated template with only the name and entry point filled in: compatibility_date 2025-09-27 (six months before the project existed), observability enabled, source maps uploaded, nodejs_compat, every binding, variable, asset and service example left commented out. |
 | `hw-c26` | 2026-09-04 | behavioral | verified | confirmed | The repository has no tags, releases, issues or pull requests; the API reports version 1.0.0 and package.json 0.0.0; no version has ever changed; the only mechanism that has ever run on GitHub for it is the Pages build. |
+| `hw-c28` | 2026-10-24 | direct | verified | confirmed | The Pages playground source adds only early object/base CSP and referrer metadata, preserving existing script and style behavior. |
 
 ## Appendix B — Contradiction register
 
@@ -682,6 +692,7 @@ All four reachable commits were deep-read (the lockfile excepted); both refs exa
 | `src-inaccessible-cloudflare-dashboard` | Cloudflare Workers dashboard — deployment history, request analytics, error rates | external | inaccessible | — | https://dash.cloudflare.com (owner account; not opened) |
 | `src-inaccessible-rapidapi` | RapidAPI provider dashboard / listing state | external | inaccessible | — | https://rapidapi.com (owner account; not opened) |
 | `src-inaccessible-authoring-sessions` | AI-assistant sessions of 2026-03-26 (CascadeProjects directory) and of 2026-07-25 / 2026-09-01 (the consolidation edits and the snapshot commit authored as "AI Assistant") | external | inaccessible | — | former /Users/…/CascadeProjects path (unlinked 2026-05-05); no transcripts on disk |
+| `src-pages-policy-2026-10-24` | playground metadata source and validation | behavioral | accessible | 2026-10-24 | docs/index.html; history render and validate; exact metadata-only diff |
 
 ## Appendix D — Coverage and reproducibility
 
@@ -689,7 +700,7 @@ All four reachable commits were deep-read (the lockfile excepted); both refs exa
 - **audit_date:** 2026-09-04
 - **full_audit_anchor:** 57154c55564897f96eebf558b14f51c24c0a80eb
 - **incremental_anchor:** 57154c55564897f96eebf558b14f51c24c0a80eb
-- **reachable_commit_count:** 4
+- **reachable_commit_count:** 6
 - **refs_examined:**
   - refs/heads/master
   - refs/remotes/origin/master
