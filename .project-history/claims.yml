@@ -376,3 +376,13 @@ claims:
     confidence: confirmed
     rationale: Actual Worker runtime assertions and production bundling passed.
     caveats: Nine tests establish transport and representative route coverage, not exhaustive utility correctness.
+  - claim_id: hw-c28
+    claim: The Pages playground source adds only early object/base CSP and referrer metadata, preserving existing script and style behavior.
+    date: 2026-10-24
+    source_ids: [src-pages-policy-2026-10-24]
+    locator: docs/index.html head metadata and exact two-line source diff
+    evidence_type: direct
+    status: verified
+    confidence: confirmed
+    rationale: HTML parsing and exact removal comparison preserve the original document bytes.
+    caveats: Source verification does not establish live publication or arbitrary HTTP response headers.

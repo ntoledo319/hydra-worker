@@ -60,6 +60,9 @@ Reading the rows: `occurred` / `decided` / `merged` / `released` are the distinc
 | 2026-10-23 | decided | `hydra-worker-2026-10-23-https-hardening` | Require HTTPS and establish real Worker regression coverage | `.project-history/events/2026/hydra-worker-2026-10-23-https-hardening.md` |
 | 2026-10-23 | occurred | `hydra-worker-2026-10-23-https-hardening` | Require HTTPS and establish real Worker regression coverage | `.project-history/events/2026/hydra-worker-2026-10-23-https-hardening.md` |
 | 2026-10-23 | released | `hydra-worker-2026-10-23-https-hardening` | Require HTTPS and establish real Worker regression coverage | `.project-history/events/2026/hydra-worker-2026-10-23-https-hardening.md` |
+| 2026-10-24 | claim | `hw-c28` | The Pages playground source adds only early object/base CSP and referrer metadata, preserving existing script | `.project-history/claims.yml` |
+| 2026-10-24 | decided | `hydra-worker-2026-10-24-pages-browser-policy` | Add minimal browser policy to the Pages playground | `.project-history/events/2026/hydra-worker-2026-10-24-pages-browser-policy.md` |
+| 2026-10-24 | occurred | `hydra-worker-2026-10-24-pages-browser-policy` | Add minimal browser policy to the Pages playground | `.project-history/events/2026/hydra-worker-2026-10-24-pages-browser-policy.md` |
 
 ### Git anchors cited by events
 

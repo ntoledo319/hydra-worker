@@ -208,3 +208,10 @@ sources:
     locator: test/index.spec.js
     retrieved_at: 2026-10-23
     notes: Nine Worker tests and Wrangler production dry-run passed during owner-requested website hardening.
+  - id: src-pages-policy-2026-10-24
+    kind: playground metadata source and validation
+    class: behavioral
+    access: accessible
+    locator: docs/index.html; history render and validate; exact metadata-only diff
+    retrieved_at: 2026-10-24
+    notes: Two early metadata declarations; existing scripts, styles, links and API behavior preserved.
